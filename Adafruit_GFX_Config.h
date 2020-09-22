@@ -4,11 +4,8 @@
 // Uncomment this to turn off the builtin splash
 //#define NO_SPLASH_ADAFRUIT
 
-// Uncomment this to enable all functionality
-//#define GFX_WANT_ABSTRACTS
-
-// Uncomment this to enable only runtime font scaling, without all the rest of the Abstracts
-//#define GFX_SIZEABLE_TEXT
+// Turn on or off IoAbstraction extensions. Default is on.
+#define USE_IOABSTRACTION_TCMENU
 
 
 #endif

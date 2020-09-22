@@ -20,11 +20,15 @@ Although many newer mbed RTOS chipsets have inbuilt hardware LCD drivers, there'
 * You can use the regular [Adafruit_GFX introductory guide](https://learn.adafruit.com/adafruit-gfx-graphics-library/overview) as this fork has high compatibility. 
 * It also integrates well with tcMenu, IoAbstraction and TaskManagerIO.
 
+## Issues
+
+Unless you are absolutely sure that the issue is a core Adafruit_GFX issue, please raise the issue here first for us to triage it.
+
 ## Usage
 
 This library can work with SSD1306 and SH1106 displays over I2C or SPI. There's a couple of really simple examples packaged that show basic usage. However, you can look at almost any Adafruit example, as this library is completely compatible, especially wit the IoAbstraction extensions.
 
-Although not required, this library has the ability to integrate with IoAbstraction by defining USE_IOABSTRACTION_TCMENU, this provides a complete Print interface that is nearly compatible with Arduino's print functions. I'll be honest, we all but assume this flag is set because all our development uses it.
+Although not required, this library has the ability to integrate with IoAbstraction by defining USE_IOABSTRACTION_TCMENU, this provides a complete Print interface that is nearly compatible with Arduino's print functions. I'll be honest, we all but assume this flag is set because all our development uses it. To completely remove IoAbstraction, remove the flag in the config header. 
 
 Performance, at the moment the SSD1306 class could be significantly optimised. However, our first aim is to get it stable on mbed 5/6, we'll look at performance later.
 

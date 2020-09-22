@@ -51,43 +51,26 @@ public:
 protected:
     void sendDisplayBuffer() override
     {
+        char buff[133];
 
-        if(mDisplayType == SH_1106) {
-            char buff[133];
+        auto rows = uint8_t(HEIGHT / 8);
+        uint16_t col = 2;
+        for(uint8_t row=0; row < rows; row++) {
+            // for each row we go into command mode and send the new row offset, SH1106 cannot do this
+            // automatically, so we need to do it and it's compatible with SSD1306 too.
+            command(0xB0 + row);//set page address
+            command(col & 0xfU);//set lower column address
+            command(0x10U | (col >> 4U));//set higher column address
 
-            auto rows = uint8_t(HEIGHT / 8);
-            uint16_t col = 2;
-            for(uint8_t row=0; row < rows; row++) {
-                // for each row we go into command mode and send the new row offset, SH1106 cannot do this
-                // automatically, so we need to do it for it.
-                command(0xB0 + row);//set page address
-                command(col & 0xfU);//set lower column address
-                command(0x10U | (col >> 4U));//set higher column address
-
-                buff[0] = 0x40; // start data mode
-                // now we prepare a whole row of data, no need to mess around with smaller segments, then dump
-                // the lot into i2c.
-                for(int i=0;i<WIDTH;i++) {
-                    buff[i + 1] = buffer[(row * WIDTH) + i];
-                }
-                mi2c.write(mi2cAddress, buff, WIDTH);
+            buff[0] = 0x40; // start data mode
+            // now we prepare a whole row of data, no need to mess around with smaller segments, then dump
+            // the lot into i2c.
+            for(int i=0;i<WIDTH;i++) {
+                buff[i + 1] = buffer[(row * WIDTH) + i];
             }
+            mi2c.write(mi2cAddress, buff, WIDTH);
         }
-        else {
-            // for SSD1306 we do what we used to do..
-            char buff[20];
-            buff[0] = 0x40; // Data Mode all the way for SSD1306!
-
-            // send display buffer in 16 byte chunks
-            for (uint16_t i = 0, q = buffSize; i < q; i += 16) {
-                uint16_t x;
-                // TODO - this will segfault if buffer.size() % 16 != 0
-                for (x = 1; x < sizeof(buff); x++)
-                    buff[x] = buffer[i + x - 1];
-                mi2c.write(mi2cAddress, buff, sizeof(buff));
-            }
-        }
-    };
+    }
 
     I2C &mi2c;
     uint8_t mi2cAddress;

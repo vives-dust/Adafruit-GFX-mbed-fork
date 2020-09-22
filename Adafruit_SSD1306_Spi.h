@@ -38,17 +38,16 @@ public:
         dc = dcState;
         wait_us(1);
         cs = 0;
-        wait_us(1);
     }
 
-    virtual void command(uint8_t c)
+    void command(uint8_t c) override
     {
         toggleDC(0);
         mspi.write(c);
         cs = 1;
     };
 
-    virtual void data(uint8_t c)
+    void data(uint8_t c) override
     {
         toggleDC(1);
         mspi.write(c);
@@ -56,40 +55,26 @@ public:
     };
 
 protected:
-    virtual void sendDisplayBuffer()
+    void sendDisplayBuffer() override
     {
-        if(mDisplayType == SH_1106) {
-            auto rows = HEIGHT / 8;
-            auto col = 2;
-            for(uint8_t row=0; row < rows; row++) {
-                // for each row we go into command mode and send the new row offset, SH1106 cannot do this
-                // automatically, so we need to do it for it.
-                command(0xB0 + row);//set page address
-                command(col & 0xfU);//set lower column address
-                command(0x10U | (col >> 4U));//set higher column address
+        auto rows = HEIGHT / 8;
+        auto col = 2;
+        for(uint8_t row=0; row < rows; row++) {
+            // for each row we go into command mode and send the new row offset, SH1106 cannot do this
+            // automatically, so we need to do it for it.
+            command(0xB0 + row);//set page address
+            command(col & 0xfU);//set lower column address
+            command(0x10U | (col >> 4U));//set higher column address
 
-                toggleDC(1);
+            toggleDC(1);
 
-                // now we prepare a whole row of data, no need to mess around with smaller segments, then dump
-                // the lot into i2c.
-                for(int i=0;i<WIDTH;i++) {
-                    mspi.write(buffer[(row * WIDTH) + i]);
-                }
+            // now we prepare a whole row of data to send over SPI.
+            for(int i=0;i<WIDTH;i++) {
+                mspi.write(buffer[(row * WIDTH) + i]);
             }
         }
-        else {
-            toggleDC(1);
-            for(uint16_t i=0, q=buffSize; i<q; i++)
-                mspi.write(buffer[i]);
-        }
 
-        if(HEIGHT == 32)
-        {
-            toggleDC(1);
-            for(uint16_t i=0, q=buffSize; i<q; i++)
-                mspi.write(0);
-        }
-
+        // make sure we de-select the chip
         cs = 1;
     };
 
