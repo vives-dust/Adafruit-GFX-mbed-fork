@@ -1,5 +1,15 @@
 # Adafruit GFX Library fork supporting SSD1306/SH1106 displays on mbed 5/6
 
+This is the core graphics library for all our displays, providing a common set of graphics primitives (points, lines, circles, etc.). It needs to be paired with a hardware-specific library for each display device we carry (to handle the lower-level functions).
+
+Adafruit invests time and resources providing this open source code, please support Adafruit and open-source hardware by purchasing products from Adafruit!
+
+Written by Limor Fried/Ladyada for Adafruit Industries.
+BSD license, check license.txt for more information.
+All text above must be included in any redistribution.
+
+This library carries exactly the same licensing terms as the original, any changes made in this repo are assumed to be under the same terms as the original too.
+
 ## Summary
 
 Although many newer mbed RTOS chipsets have inbuilt hardware LCD drivers, there's sometimes a need to use a more basic display, such as an OLED or LCD unit. This is a fork of the Adafruit_GFX library with changes to run on mbed 5/6 RTOS. It is derived from a few sources:
@@ -24,21 +34,7 @@ Every fork should state what it's purpose is. This fork is purely to provide mbe
 
 Important note about bug fixes: do not put in PRs for the core graphics class here, only mbed and display specific fixes will be applied. Instead apply any changes to the core and then we'll re-pull the change here.
 
-This library carries exactly the same licensing terms as the original, any changes made in this repo are assumed to be under the same terms as the original too.
 
-## The original text is below.
-
-This is the core graphics library for all our displays, providing a common set of graphics primitives (points, lines, circles, etc.). It needs to be paired with a hardware-specific library for each display device we carry (to handle the lower-level functions).
-
-Adafruit invests time and resources providing this open source code, please support Adafruit and open-source hardware by purchasing products from Adafruit!
-
-Written by Limor Fried/Ladyada for Adafruit Industries.
-BSD license, check license.txt for more information.
-All text above must be included in any redistribution.
-
-Recent Arduino IDE releases include the Library Manager for easy installation. Otherwise, to download, click the DOWNLOAD ZIP button, uncompress and rename the uncompressed folder Adafruit_GFX. Confirm that the Adafruit_GFX folder contains Adafruit_GFX.cpp and Adafruit_GFX.h. Place the Adafruit_GFX library folder your ArduinoSketchFolder/Libraries/ folder. You may need to create the Libraries subfolder if its your first library. Restart the IDE.
-
-**You will also need to install the latest Adafruit BusIO library.** Search for "Adafruit BusIO" in the library manager, or install by hand from https://github.com/adafruit/Adafruit_BusIO
 
 # Useful Resources
 
