@@ -52,8 +52,10 @@ int main()
     taskManager.scheduleFixedRate(75, [] {
         gfx.setFont(nullptr);
         gfx.setCursor(0, 0);
-        gfx.print("hello world");
+        gfx.setTextSize(2);
+        gfx.print("mbed demo");
         gfx.fillRect(10, 25, 50, 10, BLACK);
+        gfx.setTextSize(1);
         gfx.setCursor(10, 25);
         gfx.print((double) millis() / 1000.0);
         gfx.drawXBitmap(40, 40, iconWifiThreeBar, 16, 12, WHITE);
