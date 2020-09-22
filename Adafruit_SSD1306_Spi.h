@@ -58,7 +58,7 @@ protected:
     void sendDisplayBuffer() override
     {
         auto rows = HEIGHT / 8;
-        auto col = 2;
+        auto col = 0U;
         for(uint8_t row=0; row < rows; row++) {
             // for each row we go into command mode and send the new row offset, SH1106 cannot do this
             // automatically, so we need to do it for it.
