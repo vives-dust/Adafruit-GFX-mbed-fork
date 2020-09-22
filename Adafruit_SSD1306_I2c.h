@@ -54,7 +54,7 @@ protected:
         char buff[133];
 
         auto rows = uint8_t(HEIGHT / 8);
-        uint16_t col = 2;
+        uint16_t col = 0;
         for(uint8_t row=0; row < rows; row++) {
             // for each row we go into command mode and send the new row offset, SH1106 cannot do this
             // automatically, so we need to do it and it's compatible with SSD1306 too.
