@@ -1,3 +1,8 @@
+/**
+ * An example that shows how to render using an SSD1306 display for text
+ * and graphics. It should compile for most mbed 5 and 6 boards.
+ * Use build flag BUILD_FOR_MBED_6 to target mbed 6.
+ */
 
 #include <cstdio>
 #include <TaskManager.h>
@@ -9,14 +14,17 @@
 #include <Fonts/FreeSans9pt7b.h>
 
 // Host PC Communication channels
-BufferedSerial pc(USBTX, USBRX); // tx, rx
-FILE* serPort = fdopen(&pc, "w");
+#ifdef BUILD_FOR_MBED_6
+BufferedSerial pc(USBTX, USBRX);
+#else
+Serial pc(USBTX, USBRX);
+#endif
 MBedLogger LoggingPort(pc);
 
 //I2C i2c(PF_0,PF_1);
 //Adafruit_SSD1306_I2c gfx(i2c, NC, SSD_I2C_ADDRESS, 64, 132, SH_1106);
 
-SPI spi(PA_7, PA_6, PA_5);
+SPI spi(PB_5, PB_4, PB_3);
 Adafruit_SSD1306_Spi gfx(spi, PD_15, PF_12, PF_13, 64, 128, SSD_1306);
 
 bool exitApp = false;
@@ -27,24 +35,29 @@ const uint8_t iconWifiThreeBar[] = {
 };
 int main()
 {
+#ifdef BUILD_FOR_MBED_6
+    pc.set_baud(115200);
+#else
+    pc.baud(115200);
+#endif
+
     //i2c.frequency(400000);
     gfx.begin();
-    pc.set_baud(115200);
-    fprintf(serPort, "Hello from mbed graphics demo\n");
+    serdebugF("Hello from mbed graphics demo");
 
     switches.initialise(internalDigitalIo(), true);
     switches.addSwitch(PE_4, [] (pinid_t id, bool held) {
-        fprintf(serPort, "Switch Pressed %d, %d\n", (int)id, (int) held);
+        serdebugF3("Switch Pressed", (int)id, (int) held);
     });
     switches.addSwitch(USER_BUTTON, [] (pinid_t id, bool held) {
-        fprintf(serPort, "User Pressed %d, %d\n", (int)id, (int) held);
+        serdebugF3("User Pressed", (int)id, (int) held);
     }, NO_REPEAT, true);
 
     setupRotaryEncoderWithInterrupt(PE_2, PE_5, []( int val) {
-        fprintf(serPort, "Encoder %d\n", val);
+        serdebugF2("Encoder", val);
     });
 
-    fprintf(serPort, "Created\n");
+    serdebugF("Created");
 
     // Display with the Adafruit Library
     gfx.clearDisplay();
