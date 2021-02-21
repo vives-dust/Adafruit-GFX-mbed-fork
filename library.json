@@ -27,7 +27,7 @@
         "spi",
         "ssd1306"
     ],
-    "name": "Adafruit_GFX_mbed",
+    "name": "Adafruit_GFX_mbed_oled",
     "platforms": "*",
     "dependencies":
     [
