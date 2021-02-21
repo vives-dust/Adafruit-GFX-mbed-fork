@@ -2,7 +2,7 @@
     "authors":
     [
         {
-            "name": "DaveTCC",
+            "name": "DaveTcc",
             "url": "https://www.thecoderscorner.com",
             "maintainer": true
         },
@@ -33,12 +33,12 @@
     [
         {
             "name": "IoAbstraction",
-            "authors": "DaveTCC"
+            "authors": "DaveTcc"
         }
     ],
     "repository": {
         "type": "git",
         "url": "https://github.com/davetcc/Adafruit-GFX-mbed-fork"
     },
-    "version": "0.1.0"
+    "version": "0.1.1"
 }
