@@ -1,4 +1,4 @@
-# Adafruit GFX Library fork supporting SSD1306/SH1106 displays on mbed 5/6
+## Adafruit GFX Library original text:
 
 This is the core graphics library for all our displays, providing a common set of graphics primitives (points, lines, circles, etc.). It needs to be paired with a hardware-specific library for each display device we carry (to handle the lower-level functions).
 
@@ -10,7 +10,7 @@ All text above must be included in any redistribution.
 
 This library carries exactly the same licensing terms as the original, any changes made in this repo are assumed to be under the same terms as the original too.
 
-## Summary
+## Library fork supporting SSD1306/SH1106 displays on mbed 5/6 RTOS
 
 Although many newer mbed RTOS chipsets have inbuilt hardware LCD drivers, there's sometimes a need to use a more basic display, such as an OLED or LCD unit. This is a fork of the Adafruit_GFX library with changes to run on mbed 5/6 RTOS. It is derived from a few sources:
 
@@ -37,8 +37,6 @@ Performance, at the moment the SSD1306 class could be significantly optimised. H
 Every fork should state what it's purpose is. This fork is purely to provide mbed support for a few popular displays, we do not intend to change the core libraries in any way. It allows mbed V6 users to take advantage of the excellent Adafruit_GFX library. We have set it up to work with platformIO, but it should also work with any other build system.
 
 Important note about bug fixes: do not put in PRs for the core graphics class here, only mbed and display specific fixes will be applied. Instead apply any changes to the core and then we'll re-pull the change here.
-
-
 
 # Useful Resources
 
