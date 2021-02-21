@@ -26,6 +26,10 @@ All text above, and the splash screen must be included in any redistribution
 #include "mbed.h"
 #include "Adafruit_GFX.h"
 
+#ifndef PROGMEM
+#define PROGMEM
+#endif // PROGMEM
+
 #define SSD1306_EXTERNALVCC 0x1
 #define SSD1306_SWITCHCAPVCC 0x2
 

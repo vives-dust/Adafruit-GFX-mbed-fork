@@ -4,9 +4,11 @@
 
 #include <cstdio>
 #include "mbed.h"
+#include <PlatformDetermination.h>
 #include <TaskManager.h>
 //#include "Adafruit_SSD1306_I2c.h" (for i2c displays)
 #include "Adafruit_SSD1306_Spi.h"
+#include <Fonts/FreeSans9pt7b.h>
 
 bool running = true;
 
@@ -23,7 +25,8 @@ int main()
     gfx.begin();
 
     gfx.clearDisplay();
-    gfx.setCursor(0, 0);
+    gfx.setFont(&FreeSans9pt7b);
+    gfx.setCursor(0, 16);
     gfx.setTextColor(WHITE);
     gfx.print("Hello mbed");
 
@@ -32,7 +35,8 @@ int main()
     gfx.display();
 
     taskManager.scheduleFixedRate(1, [] {
-        gfx.fillRect(0, 20, gfx.width(), 20);
+        gfx.fillRect(0, 20, gfx.width(), 20, BLACK);
+        gfx.setFont(nullptr);
         gfx.setCursor(0, 20);
         gfx.print(millis());
 

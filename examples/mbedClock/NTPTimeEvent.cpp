@@ -1,6 +1,3 @@
-//
-// Created by David Cherry on 25/06/2020.
-//
 
 #include <IoLogging.h>
 #include "NTPTimeEvent.h"

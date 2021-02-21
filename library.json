@@ -17,7 +17,8 @@
             "maintainer": false
         }
     ],
-    "description": "A derived version of the BSD licensed Adafruit GFX library for mbed 6 RTOS boards. It can render to SSD1306 and SH1106 controllers using SPI or I2C.",
+    "description": "A derived version of the BSD licensed Adafruit GFX library for mbed 6 RTOS boards. It can render to SSD1306 and SH1106 controllers using SPI or I2C. It currently requires IoAbstraction and TaskManagerIO to operate.",
+    "license": "BSD-Source-Code",
     "frameworks": "mbed",
     "keywords": [
         "display",
@@ -37,7 +38,7 @@
     ],
     "repository": {
         "type": "git",
-        "url": ""
+        "url": "https://github.com/davetcc/Adafruit-GFX-mbed-fork"
     },
-    "version": "0.0.1"
+    "version": "0.1.0"
 }

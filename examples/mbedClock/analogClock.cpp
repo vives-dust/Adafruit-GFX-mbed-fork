@@ -1,6 +1,7 @@
 /**
  * A more complex example that acquires time from the network using NTP and displays it on the screen
- * The NTP class is apache licensed, and can be used directly in your code
+ * The NTP class is licensed under the same license as the code, and can be used directly in your code
+ * even for commercial designs.
  *
  * MBED 6 RTOS example.
  */
