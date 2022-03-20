@@ -260,7 +260,9 @@ public:
     /**********************************************************************/
     void cp437(bool x = true) { _cp437 = x; }
 
+#ifdef USE_IOABSTRACTION_TCMENU
     using Print::write;
+#endif
 
     virtual size_t write(uint8_t);
 
